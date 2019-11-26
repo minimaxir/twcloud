@@ -1,5 +1,6 @@
 import twint
 from stylecloud import gen_stylecloud
+from wordcloud import STOPWORDS
 import re
 import fire
 
@@ -48,10 +49,11 @@ def get_tweet_text(username, search, limit):
     return " ".join(tweets)
 
 
-def gen_twcloud(username=None, search=None, limit=1000,
+def gen_twcloud(username=None, search=None, limit=100,
                 colors='white',
                 background_color='#1DA1F2',
                 icon_name='fab fa-twitter',
+                custom_stopwords=STOPWORDS,
                 **kwargs):
     """Generatees a twcloud of any public Twitter account or search query!
     See stylecloud docs for additional parameters.
@@ -67,12 +69,19 @@ def gen_twcloud(username=None, search=None, limit=1000,
     if 'palette' in kwargs:
         colors = None
 
+    # Some stopwords (e.g. I'm, I've) must have quotes removed
+    # to match removed smart quotes from tweets.
+    noquote_stop = [re.sub(r"'", '', word) for word in custom_stopwords
+                    if "'" in word]
+    custom_stopwords.update(set(noquote_stop))
+
     print("Generating the twcloud...")
     gen_stylecloud(text=tweets,
                    output_name='twcloud.png',
                    colors=colors,
                    background_color=background_color,
                    icon_name=icon_name,
+                   custom_stopwords=custom_stopwords,
                    **kwargs)
 
 
