@@ -1,6 +1,7 @@
 import twint
 from stylecloud import gen_stylecloud
 import re
+import fire
 
 
 def clean_tweet(tweet):
@@ -11,6 +12,7 @@ def clean_tweet(tweet):
     Whitespace does not need to be normalized since it is ignored
     anyways when generating the stylecloud.
     """
+
     pattern = r'http\S+|pic.\S+|@[a-zA-Z0-9_]+|#[a-zA-Z0-9_]+|[‘’“”’–—…]|\xa0'
     return re.sub(pattern, '', tweet)
 
@@ -51,6 +53,12 @@ def gen_twcloud(username=None, search=None, limit=1000,
                 background_color='#1DA1F2',
                 icon_name='fab fa-twitter',
                 **kwargs):
+    """Generatees a twcloud of any public Twitter account or search query!
+    See stylecloud docs for additional parameters.
+    :param username: Twitter @ username to gather tweets.
+    :param search: Search query to use to gather tweets.
+    :param limit: Number of tweets retrieved.
+    """
 
     tweets = get_tweet_text(username, search, limit)
 
@@ -63,5 +71,6 @@ def gen_twcloud(username=None, search=None, limit=1000,
                    **kwargs)
 
 
-if __name__ == "__main__":
-    gen_twcloud(username='dril', limit=100, size=1024)
+def twcloud_cli(**kwargs):
+    """Entrypoint for the twcloud CLI."""
+    fire.Fire(gen_twcloud)
