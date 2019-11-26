@@ -1,5 +1,16 @@
 import twint
 from stylecloud import gen_stylecloud
+import re
+
+
+def clean_tweet(tweet):
+    """
+    Cleans the tweet text of URLs, user tags, and hashtags.
+
+    Whitespace does not need to be normalized since it is ignored
+    anyways when generating the stylecloud.
+    """
+    return re.sub(r'http\S+|@[a-zA-Z0-9_]+|#[a-zA-Z0-9_]+', '', tweet)
 
 
 def get_tweet_text(username=None, search=None, limit=1000):
@@ -28,7 +39,7 @@ def get_tweet_text(username=None, search=None, limit=1000):
     twint.run.Search(c)
     assert len(twint.output.tweets_list) > 0, "No tweets were returned."
 
-    tweets = [tweet.tweet for tweet in twint.output.tweets_list]
+    tweets = [clean_tweet(tweet.tweet) for tweet in twint.output.tweets_list]
 
     return tweets
 
