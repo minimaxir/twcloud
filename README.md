@@ -27,7 +27,7 @@ pip3 install twcloud
 
 ## Usage
 
-You can use twcloud in a Python script or as a standalone CLI app. For example, let's visualize Twitter CEO Jack Dorsey's most recent Tweets:
+You can use twcloud in a Python script or as a standalone CLI app. For example, let's visualize Twitter CEO [Jack Dorsey](https://twitter.com/jack)'s most recent Tweets:
 
 From Python:
 
@@ -61,7 +61,7 @@ twcloud --search '#MondayNightFootball lang:en' --icon_name 'fas fa-football-bal
 
 ![](docs/football.png)
 
-A little known feature of Twitter search is that if you search for a Tweet URL, you will get all Quote Tweets corresponding to that tweet. How about getting English quote tweets resulting from the recent tweet [asking for quote tweeets with controversial food opinions](https://twitter.com/jonbecker_/status/1196805486907052033)?
+A little known feature of Twitter search is that if you search for a Tweet URL, you will get all Quote Tweets corresponding to that tweet. How about getting English quote tweets resulting from the recent tweet [asking for quote tweets with controversial food opinions](https://twitter.com/jonbecker_/status/1196805486907052033)?
 
 ```python
 import twcloud
@@ -81,7 +81,7 @@ twcloud --search 'https://twitter.com/jonbecker_/status/1196805486907052033 lang
 
 ### Helpful Parameters
 
-These parameters are valid for both the Python function and the CLI (you can use `twcloud -- --help` to get this information as well). Additional visual customization parameters can be found within the stylecloud repo.
+These parameters are valid for both the Python function and the CLI (you can use `twcloud -- --help` to get this information as well). Additional visual customization parameters can be found [within the stylecloud repo](https://github.com/minimaxir/stylecloud#helpful-parameters).
 
 * username: Twitter @ username to gather tweets (excluding the @). Any public Twitter account is valid.
 * search: Search query to use. Can use a hashtag or a tweet URL (to get quote-tweets)
