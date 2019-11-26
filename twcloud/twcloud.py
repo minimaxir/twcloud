@@ -11,7 +11,7 @@ def clean_tweet(tweet):
     Whitespace does not need to be normalized since it is ignored
     anyways when generating the stylecloud.
     """
-    pattern = r'http\S+|pic.\S+|@[a-zA-Z0-9_]+|#[a-zA-Z0-9_]+|[‘’“”’–—…]'
+    pattern = r'http\S+|pic.\S+|@[a-zA-Z0-9_]+|#[a-zA-Z0-9_]+|[‘’“”’–—…]|\xa0'
     return re.sub(pattern, '', tweet)
 
 
@@ -47,5 +47,5 @@ def get_tweet_text(username=None, search=None, limit=1000):
 
 
 if __name__ == "__main__":
-    x = get_tweet_text(username='realdonaldtrump', limit=20)
+    x = get_tweet_text(username='mat', limit=20)
     print(x)
