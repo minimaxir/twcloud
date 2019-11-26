@@ -5,12 +5,14 @@ import re
 
 def clean_tweet(tweet):
     """
-    Cleans the tweet text of URLs, user tags, and hashtags.
+    Cleans the tweet text of URLs, user tags, hashtags, pictures,
+    and smart punctuation.
 
     Whitespace does not need to be normalized since it is ignored
     anyways when generating the stylecloud.
     """
-    return re.sub(r'http\S+|@[a-zA-Z0-9_]+|#[a-zA-Z0-9_]+', '', tweet)
+    pattern = r'http\S+|pic.\S+|@[a-zA-Z0-9_]+|#[a-zA-Z0-9_]+|[‘’“”’–—…]'
+    return re.sub(pattern, '', tweet)
 
 
 def get_tweet_text(username=None, search=None, limit=1000):
