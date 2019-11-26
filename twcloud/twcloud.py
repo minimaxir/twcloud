@@ -20,7 +20,7 @@ def clean_tweet(tweet):
 
 def get_tweet_text(username, search, limit):
     """
-    Returns a bulk text of cleaned tweets.
+    Returns a bulk text of cleaned Tweets from the specified username/search.
     """
 
     assert any([username, search]), "Either `username` or `search`" \
@@ -31,7 +31,7 @@ def get_tweet_text(username, search, limit):
     c.Store_object = True
     c.Hide_output = True
 
-    # User config
+    # User-specified config
     c.Search = search
     c.Username = username
     c.Limit = limit
@@ -54,8 +54,9 @@ def gen_twcloud(username=None, search=None, limit=100,
                 background_color='#1DA1F2',
                 icon_name='fab fa-twitter',
                 custom_stopwords=STOPWORDS,
+                output_name='twcloud.png',
                 **kwargs):
-    """Generatees a twcloud of any public Twitter account or search query!
+    """Generates a twcloud of any public Twitter account or search query!
     See stylecloud docs for additional parameters.
     :param username: Twitter @ username to gather tweets.
     :param search: Search query to use to gather tweets.
@@ -77,7 +78,7 @@ def gen_twcloud(username=None, search=None, limit=100,
 
     print("Generating the twcloud...")
     gen_stylecloud(text=tweets,
-                   output_name='twcloud.png',
+                   output_name=output_name,
                    colors=colors,
                    background_color=background_color,
                    icon_name=icon_name,
