@@ -62,6 +62,11 @@ def gen_twcloud(username=None, search=None, limit=1000,
 
     tweets = get_tweet_text(username, search, limit)
 
+    # If `palette` is specified, override `colors`.
+    # This is the opposite behavior of stylecloud.
+    if 'palette' in kwargs:
+        colors = None
+
     print("Generating the twcloud...")
     gen_stylecloud(text=tweets,
                    output_name='twcloud.png',
