@@ -49,7 +49,7 @@ def get_tweet_text(username, search, limit):
     return " ".join(tweets)
 
 
-def gen_twcloud(username=None, search=None, limit=100,
+def gen_twcloud(username=None, search=None, limit=500,
                 colors='white',
                 background_color='#1DA1F2',
                 icon_name='fab fa-twitter',
