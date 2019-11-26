@@ -15,9 +15,9 @@ def clean_tweet(tweet):
     return re.sub(pattern, '', tweet)
 
 
-def get_tweet_text(username=None, search=None, limit=1000):
+def get_tweet_text(username, search, limit):
     """
-    Returns a list of cleaned tweets.
+    Returns a bulk text of cleaned tweets.
     """
 
     assert any([username, search]), "Either `username` or `search`" \
@@ -35,17 +35,33 @@ def get_tweet_text(username=None, search=None, limit=1000):
 
     # Run the tweet search (may take awhile)
     if username:
-        print(f"Retrieving {limit} tweets for {username}")
+        print(f"Retrieving {limit} tweets for @{username}...")
     else:
-        print(f"Retrieving {limit} tweets about {search}")
+        print(f"Retrieving {limit} tweets about {search}...")
     twint.run.Search(c)
     assert len(twint.output.tweets_list) > 0, "No tweets were returned."
 
     tweets = [clean_tweet(tweet.tweet) for tweet in twint.output.tweets_list]
 
-    return tweets
+    return " ".join(tweets)
+
+
+def gen_twcloud(username=None, search=None, limit=1000,
+                colors='white',
+                background_color='#1DA1F2',
+                icon_name='fab fa-twitter',
+                **kwargs):
+
+    tweets = get_tweet_text(username, search, limit)
+
+    print("Generating the twcloud...")
+    gen_stylecloud(text=tweets,
+                   output_name='twcloud.png',
+                   colors=colors,
+                   background_color=background_color,
+                   icon_name=icon_name,
+                   **kwargs)
 
 
 if __name__ == "__main__":
-    x = get_tweet_text(username='mat', limit=20)
-    print(x)
+    gen_twcloud(username='dril', limit=100, size=1024)
