@@ -43,6 +43,12 @@ Or from the command line:
 twcloud --username jack
 ```
 
+Or even more simply, to quickly gather tweets from a user:
+
+```sh
+twcloud jack
+```
+
 ![](docs/jack.png)
 
 You can also search for keywords. How about finding English Tweets about `#MondayNightFootball`, and changing the theming appropriately?
